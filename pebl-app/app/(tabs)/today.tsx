@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { Alert, ScrollView, StyleSheet, Text, View } from 'react-native';
+import { ScrollView, StyleSheet, Text, View } from 'react-native';
 import { router } from 'expo-router';
 import { useSQLiteContext } from 'expo-sqlite';
 import { SafeAreaView } from 'react-native-safe-area-context';
@@ -10,6 +10,7 @@ import { Wordmark } from '../../components/ui';
 import { addEvent, addPeriodStart, getCycleStarts, getEventsOn, getSettings, ratingLabel, useDataVersion, type PeblEvent } from '../../lib/db';
 import { cycleDayFor, localDate } from '../../lib/dates';
 import { tagLabel } from '../../lib/tags';
+import { confirm } from '../../lib/confirm';
 import { colors } from '../../lib/motion';
 import { fonts, ui } from '../../lib/theme';
 
@@ -46,11 +47,9 @@ export default function Today() {
     router.push({ pathname: '/tag', params: { id: String(id) } });
   };
 
-  const logPeriod = () =>
-    Alert.alert('Period started today?', 'This starts a new cycle at Day 1.', [
-      { text: 'Cancel', style: 'cancel' },
-      { text: 'Yes, Day 1', onPress: () => addPeriodStart(db, today) },
-    ]);
+  const logPeriod = async () => {
+    if (await confirm('Period started today?', 'This starts a new cycle at Day 1.', 'Yes, Day 1')) addPeriodStart(db, today);
+  };
 
   return (
     <SafeAreaView style={styles.screen} edges={['top']}>
