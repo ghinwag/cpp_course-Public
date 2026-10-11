@@ -1,7 +1,7 @@
 import { StyleSheet, Text, View } from 'react-native';
 import * as Haptics from 'expo-haptics';
 import { PressableScale } from './PressableScale';
-import { TAP, fonts, ui } from '../lib/theme';
+import { fonts, ui } from '../lib/theme';
 
 type Props = {
   value: number;

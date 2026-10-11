@@ -230,3 +230,11 @@ export async function deleteEverything(db: SQLiteDatabase) {
   await db.execAsync('DELETE FROM events; DELETE FROM cycles; DELETE FROM settings; DELETE FROM sqlite_sequence;');
   dataChanged();
 }
+
+/** Every tag ever used, most used first. Lets "+ your own" tags come back as chips next time. */
+export async function getUsedTags(db: SQLiteDatabase): Promise<string[]> {
+  const rows = await db.getAllAsync<{ tag: string; n: number }>(
+    "SELECT j.value AS tag, COUNT(*) AS n FROM events, json_each(events.tags) j GROUP BY j.value ORDER BY n DESC",
+  );
+  return rows.map((r) => r.tag);
+}

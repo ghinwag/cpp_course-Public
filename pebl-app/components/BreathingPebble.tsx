@@ -2,6 +2,7 @@ import { StyleSheet, View } from 'react-native';
 import Animated, { useReducedMotion } from 'react-native-reanimated';
 import Svg, { Defs, Ellipse, Path, RadialGradient, Stop } from 'react-native-svg';
 import { BREATH_MS, EASE_IN_OUT, INHALE_PCT, colors } from '../lib/motion';
+import { fonts } from '../lib/theme';
 
 const PEBBLE_PATH =
   'M104 28 C140 26 164 50 162 82 C160 116 128 134 96 132 C62 130 38 110 40 80 C42 50 68 30 104 28 Z';
@@ -114,7 +115,7 @@ export function BreathCue({ running }: { running: boolean }) {
 
 const styles = StyleSheet.create({
   stage: { alignItems: 'center', justifyContent: 'center' },
-  cue: { height: 32, alignItems: 'center', justifyContent: 'center' },
-  cueText: { color: '#FFFFFF', fontSize: 22, fontWeight: '500', letterSpacing: -0.4 },
+  cue: { minHeight: 32, alignItems: 'center', justifyContent: 'center' },
+  cueText: { color: '#FFFFFF', fontSize: 22, fontFamily: fonts.medium, letterSpacing: -0.4 },
   cueOverlay: { position: 'absolute' },
 });
