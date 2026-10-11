@@ -43,7 +43,7 @@
     "web": "expo start --web",
     "typecheck": "tsc --noEmit",
     "lint": "expo lint",
-    "test": "node --test tests/*.test.mts"
+    "test": "node --import ./tests/ts-resolve.mjs --test tests/*.test.mts"
   },
   "private": true
 }
