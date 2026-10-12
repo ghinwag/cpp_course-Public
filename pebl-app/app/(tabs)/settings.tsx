@@ -3,6 +3,7 @@ import { Platform, StyleSheet, Switch, Text, TextInput, View } from 'react-nativ
 import { router } from 'expo-router';
 import { useSQLiteContext } from 'expo-sqlite';
 import { DatePicker } from '../../components/DatePicker';
+import { Icon } from '../../components/Icon';
 import { PressableScale } from '../../components/PressableScale';
 import { Stepper } from '../../components/Stepper';
 import { SymptomChip } from '../../components/SymptomChip';
@@ -135,9 +136,10 @@ export default function SettingsScreen() {
       <Card>
         {latest === today ? (
           // Status, not a dead button: say what's true.
-          <Text style={styles.status} accessibilityLiveRegion="polite">
-            ✓  Period logged for today
-          </Text>
+          <View style={styles.statusRow} accessible accessibilityLiveRegion="polite" accessibilityLabel="Period logged for today">
+            <Icon name="check" color={ui.accent} />
+            <Text style={styles.status}>Period logged for today</Text>
+          </View>
         ) : (
           <Button
             title="My period started today"
@@ -219,7 +221,7 @@ export default function SettingsScreen() {
           onEndEditing={() => saveSettings(db, { nickname })}
           onBlur={() => saveSettings(db, { nickname })}
           placeholder="Optional"
-          placeholderTextColor={ui.faint}
+          placeholderTextColor={ui.muted}
           maxLength={32}
           style={styles.input}
           accessibilityLabel="Nickname"
@@ -259,7 +261,8 @@ const styles = StyleSheet.create({
   action: { color: ui.accent, fontFamily: fonts.medium, fontSize: 16 },
   divider: { height: StyleSheet.hairlineWidth, backgroundColor: ui.line },
   switchRow: { flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', minHeight: 48, gap: 12 },
-  status: { color: ui.accent, fontFamily: fonts.medium, fontSize: 17, textAlign: 'center', paddingVertical: 12 },
+  statusRow: { flexDirection: 'row', alignItems: 'center', justifyContent: 'center', gap: 8, minHeight: 48 },
+  status: { color: ui.accent, fontFamily: fonts.medium, fontSize: 17 },
   small: { color: ui.faint, fontFamily: fonts.regular, fontSize: 14, lineHeight: 19 },
   startRow: { flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', minHeight: 48 },
   startDate: { color: ui.text, fontFamily: fonts.mono, fontSize: 15 },

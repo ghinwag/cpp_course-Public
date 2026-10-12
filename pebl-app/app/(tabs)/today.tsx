@@ -4,6 +4,7 @@ import { router } from 'expo-router';
 import { useSQLiteContext } from 'expo-sqlite';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import Svg, { Circle, Defs, RadialGradient, Stop } from 'react-native-svg';
+import { Icon } from '../../components/Icon';
 import { Pebble } from '../../components/Pebble';
 import { PressableScale } from '../../components/PressableScale';
 import { useToast } from '../../components/Toast';
@@ -107,7 +108,7 @@ export default function Today() {
             <Text style={styles.checkinTitle}>{checkin ? `Today felt ${ratingLabel(checkin.rating).toLowerCase()}` : 'How did today feel?'}</Text>
             <Text style={styles.checkinSub}>{checkin ? 'Tap to change' : 'Evening check-in · optional'}</Text>
           </View>
-          <Text style={styles.chevron}>›</Text>
+          <Icon name="chevron" color={ui.faint} />
         </PressableScale>
 
         {periodDue ? (
@@ -135,7 +136,6 @@ const styles = StyleSheet.create({
   divider: { width: StyleSheet.hairlineWidth, backgroundColor: ui.line },
   tagLine: { color: ui.muted, fontFamily: fonts.regular, fontSize: 15, textAlign: 'center' },
   checkin: { flexDirection: 'row', alignItems: 'center', gap: 12, backgroundColor: ui.card, borderRadius: 20, padding: 18 },
-  chevron: { color: ui.faint, fontSize: 28, fontFamily: fonts.regular, marginTop: -2 },
   checkinTitle: { color: ui.text, fontFamily: fonts.semibold, fontSize: 18 },
   checkinSub: { color: ui.muted, fontFamily: fonts.regular, fontSize: 14 },
   period: { minHeight: 48, borderRadius: 999, borderWidth: 1, borderColor: colors.roseText, alignItems: 'center', justifyContent: 'center', paddingHorizontal: 16 },

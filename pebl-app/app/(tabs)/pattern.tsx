@@ -175,7 +175,7 @@ const styles = StyleSheet.create({
   bar: { borderTopLeftRadius: 4, borderTopRightRadius: 4 },
   axis: { flexDirection: 'row', gap: 2, marginTop: 6 },
   tick: { flex: 1, textAlign: 'center', color: ui.muted, fontFamily: fonts.mono, fontSize: 12 },
-  axisLabel: { color: ui.faint, fontFamily: fonts.regular, fontSize: 12, textAlign: 'center', marginTop: 2 },
+  axisLabel: { color: ui.faint, fontFamily: fonts.regular, fontSize: 13, textAlign: 'center', marginTop: 2 },
   tagRow: { flexDirection: 'row', alignItems: 'center', gap: 10, minHeight: 28 },
   tagName: { color: ui.text, fontFamily: fonts.regular, fontSize: 15, width: 96 },
   tagTrack: { flex: 1, height: 8 },

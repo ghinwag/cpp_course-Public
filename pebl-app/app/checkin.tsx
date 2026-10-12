@@ -106,7 +106,7 @@ export default function Checkin() {
             value={note}
             onChangeText={setNote}
             placeholder="A few words, if you like"
-            placeholderTextColor={ui.faint}
+            placeholderTextColor={ui.muted}
             multiline
             maxLength={280}
             style={styles.input}

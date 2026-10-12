@@ -18,7 +18,7 @@ export const ui = {
   line: '#2C2C2E',
   text: colors.pearl,
   muted: '#A1A1A6',
-  faint: '#6E6E73',
+  faint: '#8E8E93', // ~6:1 on black, ~5:1 on ink (WCAG AA for text)
   accent: colors.rose,
   danger: '#FF6B81',
 };

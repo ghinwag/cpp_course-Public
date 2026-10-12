@@ -82,7 +82,7 @@ export default function TagSheet() {
               onSubmitEditing={addOwn}
               onBlur={addOwn}
               placeholder="e.g. cravings"
-              placeholderTextColor={ui.faint}
+              placeholderTextColor={ui.muted}
               returnKeyType="done"
               maxLength={30}
               style={styles.input}
