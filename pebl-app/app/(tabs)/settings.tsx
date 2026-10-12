@@ -133,13 +133,19 @@ export default function SettingsScreen() {
       {/* ---------- Periods ---------- */}
       <Label>Log a period</Label>
       <Card>
-        <Button
-          title={latest === today ? 'Period logged for today' : 'My period started today'}
-          disabled={latest === today}
-          onPress={async () => {
-            if (await confirm('Period started today?', 'This starts a new cycle at Day 1.', 'Yes, Day 1')) addPeriodStart(db, today);
-          }}
-        />
+        {latest === today ? (
+          // Status, not a dead button: say what's true.
+          <Text style={styles.status} accessibilityLiveRegion="polite">
+            ✓  Period logged for today
+          </Text>
+        ) : (
+          <Button
+            title="My period started today"
+            onPress={async () => {
+              if (await confirm('Period started today?', 'This starts a new cycle at Day 1.', 'Yes, Day 1')) addPeriodStart(db, today);
+            }}
+          />
+        )}
         <Button title={picker === 'add-start' ? 'Close' : 'It started on another day…'} kind="secondary" onPress={() => setPicker(picker === 'add-start' ? null : 'add-start')} />
         {picker === 'add-start' ? (
           <DatePicker
@@ -253,6 +259,7 @@ const styles = StyleSheet.create({
   action: { color: ui.accent, fontFamily: fonts.medium, fontSize: 16 },
   divider: { height: StyleSheet.hairlineWidth, backgroundColor: ui.line },
   switchRow: { flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', minHeight: 48, gap: 12 },
+  status: { color: ui.accent, fontFamily: fonts.medium, fontSize: 17, textAlign: 'center', paddingVertical: 12 },
   small: { color: ui.faint, fontFamily: fonts.regular, fontSize: 14, lineHeight: 19 },
   startRow: { flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', minHeight: 48 },
   startDate: { color: ui.text, fontFamily: fonts.mono, fontSize: 15 },

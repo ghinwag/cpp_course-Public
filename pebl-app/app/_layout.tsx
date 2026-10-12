@@ -54,15 +54,9 @@ export default function RootLayout() {
           <Stack.Screen name="(tabs)" options={{ animation: 'fade' }} />
           {/* Native presentations only: never a JS-built screen transition. */}
           <Stack.Screen name="calm" options={{ presentation: 'fullScreenModal', animation: 'fade' }} />
-          <Stack.Screen
-            name="checkin"
-            options={{ presentation: 'formSheet', sheetAllowedDetents: [0.9], sheetGrabberVisible: true, contentStyle: { backgroundColor: ui.card } }}
-          />
-          {/* Quick tags after a tap: half height, so the pebble and the "Logged" toast stay visible. */}
-          <Stack.Screen
-            name="tag"
-            options={{ presentation: 'formSheet', sheetAllowedDetents: [0.62, 0.95], sheetGrabberVisible: true, contentStyle: { backgroundColor: ui.card } }}
-          />
+          {/* Standard iOS card sheets: swipe down to dismiss. Reliable with scrolling content. */}
+          <Stack.Screen name="checkin" options={{ presentation: 'modal', contentStyle: { backgroundColor: ui.card } }} />
+          <Stack.Screen name="tag" options={{ presentation: 'modal', contentStyle: { backgroundColor: ui.card } }} />
           {/* First run only. Fade, never a slide: it is not a level deeper than anything. */}
           <Stack.Screen name="welcome" options={{ animation: 'fade', gestureEnabled: false }} />
         </Stack>

@@ -3,6 +3,7 @@ import { ScrollView, StyleSheet, Text, View } from 'react-native';
 import { router } from 'expo-router';
 import { useSQLiteContext } from 'expo-sqlite';
 import { SafeAreaView } from 'react-native-safe-area-context';
+import Svg, { Circle, Defs, RadialGradient, Stop } from 'react-native-svg';
 import { Pebble } from '../../components/Pebble';
 import { PressableScale } from '../../components/PressableScale';
 import { useToast } from '../../components/Toast';
@@ -54,15 +55,28 @@ export default function Today() {
   return (
     <SafeAreaView style={styles.screen} edges={['top']}>
       {toast.node}
-      <ScrollView contentContainerStyle={styles.content}>
+      <ScrollView contentContainerStyle={styles.content} showsVerticalScrollIndicator={false}>
         <View style={styles.header}>
           <Wordmark />
           {nickname ? <Text style={styles.hello}>Hi, {nickname}</Text> : null}
         </View>
 
+        {/* The hero: the pebble, centred in the free space, on a still glow (no idle motion). */}
         <View style={styles.pebbleArea}>
-          <Pebble onTap={onTap} onHold={() => router.push('/calm')} />
-          <Text style={styles.hint}>Tap to log a moment · Hold to calm</Text>
+          <View style={styles.glow} pointerEvents="none" importantForAccessibility="no-hide-descendants" accessibilityElementsHidden>
+            <Svg width="100%" height="100%" viewBox="0 0 100 100">
+              <Defs>
+                <RadialGradient id="todayGlow" cx="50%" cy="50%" r="50%">
+                  <Stop offset="0%" stopColor={colors.rose} stopOpacity={0.28} />
+                  <Stop offset="100%" stopColor={colors.rose} stopOpacity={0} />
+                </RadialGradient>
+              </Defs>
+              <Circle cx="50" cy="50" r="50" fill="url(#todayGlow)" />
+            </Svg>
+          </View>
+          <Pebble onTap={onTap} onHold={() => router.push('/calm')} size={300} />
+          {/* Teach the two gestures until the first tap of the day, then get out of the way. */}
+          <Text style={[styles.hint, taps.length > 0 && { opacity: 0 }]}>Tap to log a moment · Hold to calm</Text>
         </View>
 
         <View style={styles.stats} accessible accessibilityLabel={`${cycleDay ? `Cycle day ${cycleDay}. ` : ''}${taps.length} ${taps.length === 1 ? 'tap' : 'taps'} today.`}>
@@ -89,8 +103,11 @@ export default function Today() {
           accessibilityRole="button"
           accessibilityLabel={checkin ? `Today felt ${ratingLabel(checkin.rating)}. Change check-in` : 'Evening check-in: how did today feel?'}
         >
-          <Text style={styles.checkinTitle}>{checkin ? `Today felt ${ratingLabel(checkin.rating).toLowerCase()}` : 'How did today feel?'}</Text>
-          <Text style={styles.checkinSub}>{checkin ? 'Tap to change' : 'Evening check-in · optional'}</Text>
+          <View style={{ flex: 1, gap: 4 }}>
+            <Text style={styles.checkinTitle}>{checkin ? `Today felt ${ratingLabel(checkin.rating).toLowerCase()}` : 'How did today feel?'}</Text>
+            <Text style={styles.checkinSub}>{checkin ? 'Tap to change' : 'Evening check-in · optional'}</Text>
+          </View>
+          <Text style={styles.chevron}>›</Text>
         </PressableScale>
 
         {periodDue ? (
@@ -105,18 +122,20 @@ export default function Today() {
 
 const styles = StyleSheet.create({
   screen: { flex: 1, backgroundColor: ui.bg },
-  content: { paddingHorizontal: 20, paddingTop: 8, paddingBottom: 32, gap: 20 },
+  content: { flexGrow: 1, paddingHorizontal: 20, paddingTop: 8, paddingBottom: 120, gap: 16 },
   header: { flexDirection: 'row', alignItems: 'baseline', justifyContent: 'space-between', minHeight: 44 },
   hello: { color: ui.muted, fontFamily: fonts.regular, fontSize: 16 },
-  pebbleArea: { alignItems: 'center', paddingTop: 16, gap: 12 },
+  pebbleArea: { flexGrow: 1, minHeight: 340, alignItems: 'center', justifyContent: 'center', gap: 8 },
+  glow: { position: 'absolute', width: 420, height: 420 },
   hint: { color: ui.faint, fontFamily: fonts.regular, fontSize: 14, textAlign: 'center' },
   stats: { flexDirection: 'row', backgroundColor: ui.card, borderRadius: 20, paddingVertical: 16 },
   stat: { flex: 1, alignItems: 'center', gap: 2, paddingHorizontal: 8 },
-  statNum: { color: ui.text, fontFamily: fonts.monoMedium, fontSize: 28, letterSpacing: -0.5 },
+  statNum: { color: ui.text, fontFamily: fonts.monoMedium, fontSize: 30, letterSpacing: -1 },
   statLabel: { color: ui.muted, fontFamily: fonts.regular, fontSize: 14, textAlign: 'center' },
   divider: { width: StyleSheet.hairlineWidth, backgroundColor: ui.line },
   tagLine: { color: ui.muted, fontFamily: fonts.regular, fontSize: 15, textAlign: 'center' },
-  checkin: { backgroundColor: ui.card, borderRadius: 20, padding: 18, gap: 4, borderWidth: 1, borderColor: ui.line },
+  checkin: { flexDirection: 'row', alignItems: 'center', gap: 12, backgroundColor: ui.card, borderRadius: 20, padding: 18 },
+  chevron: { color: ui.faint, fontSize: 28, fontFamily: fonts.regular, marginTop: -2 },
   checkinTitle: { color: ui.text, fontFamily: fonts.semibold, fontSize: 18 },
   checkinSub: { color: ui.muted, fontFamily: fonts.regular, fontSize: 14 },
   period: { minHeight: 48, borderRadius: 999, borderWidth: 1, borderColor: colors.roseText, alignItems: 'center', justifyContent: 'center', paddingHorizontal: 16 },

@@ -112,7 +112,7 @@ function DayCard({ day }: { day: Day }) {
 
 const styles = StyleSheet.create({
   screen: { flex: 1, backgroundColor: ui.bg },
-  content: { paddingHorizontal: 20, paddingTop: 12, paddingBottom: 40, gap: 12 },
+  content: { paddingHorizontal: 20, paddingTop: 12, paddingBottom: 120, gap: 12 },
   card: { backgroundColor: ui.card, borderRadius: 18, padding: 16, gap: 8 },
   row: { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', gap: 12, flexWrap: 'wrap' },
   date: { color: ui.text, fontFamily: fonts.semibold, fontSize: 17 },

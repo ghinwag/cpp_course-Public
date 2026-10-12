@@ -163,7 +163,7 @@ function TagList({ tags }: { tags: [string, number][] }) {
 
 const styles = StyleSheet.create({
   screen: { flex: 1, backgroundColor: ui.bg },
-  content: { paddingHorizontal: 20, paddingTop: 12, paddingBottom: 40, gap: 16 },
+  content: { paddingHorizontal: 20, paddingTop: 12, paddingBottom: 120, gap: 16 },
   empty: { alignItems: 'center', gap: 12, paddingTop: 8 },
   emptyTitle: { color: ui.text, fontFamily: fonts.semibold, fontSize: 20, textAlign: 'center' },
   chartTitle: { color: ui.text, fontFamily: fonts.semibold, fontSize: 18 },

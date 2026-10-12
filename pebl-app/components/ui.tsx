@@ -83,8 +83,8 @@ const buttonKinds = StyleSheet.create({
 
 export const styles = StyleSheet.create({
   screen: { flex: 1, backgroundColor: ui.bg },
-  content: { paddingHorizontal: 20, paddingTop: 12, paddingBottom: 40, gap: 16 },
-  title: { fontFamily: fonts.semibold, fontSize: 30, color: ui.text, letterSpacing: -0.8 },
+  content: { paddingHorizontal: 20, paddingTop: 12, paddingBottom: 120, gap: 16 },
+  title: { fontFamily: fonts.semibold, fontSize: 34, lineHeight: 40, color: ui.text, letterSpacing: -0.9 },
   label: { fontFamily: fonts.medium, fontSize: 13, color: ui.muted, letterSpacing: 0.6, textTransform: 'uppercase' },
   body: { fontFamily: fonts.regular, fontSize: 16, lineHeight: 22, color: ui.muted },
   card: { backgroundColor: ui.card, borderRadius: 20, padding: 16, gap: 12 },

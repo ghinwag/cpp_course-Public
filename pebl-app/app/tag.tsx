@@ -49,9 +49,9 @@ export default function TagSheet() {
     <View style={styles.sheet}>
       <View style={styles.head}>
         <Text style={styles.title} accessibilityRole="header">
-          What’s going on?
+          Logged. What’s going on?
         </Text>
-        <Text style={styles.sub}>Optional. Your tap is already saved.</Text>
+        <Text style={styles.sub}>Add a tag if you like, or swipe down to skip.</Text>
       </View>
 
       <ScrollView contentContainerStyle={styles.body} keyboardShouldPersistTaps="handled">
